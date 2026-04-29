@@ -121,6 +121,12 @@ batmon.elf & # &> $SDCARD_PATH/batmon.txt &
 
 # start fresh, will be populated on the next connect
 rm -f $USERDATA_PATH/.asoundrc
+cat > "$USERDATA_PATH/.asoundrc" << 'EOF'
+pcm.PlaybackDmix.slave.pcm.slave.period_size 1024;
+pcm.PlaybackDmix.slave.pcm.slave.buffer_size 4096;
+pcm.PlaybackDmix.slave.pcm.slave.periods 4;
+
+EOF
 audiomon.elf & # &> $SDCARD_PATH/audiomon.txt &
 
 # BT handling
